@@ -6,13 +6,13 @@
 */
 
 #include <QCoreApplication>
-#include "accessequence.h"
+#include "accesstoken.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    DarajaCpp::AccesSequence _acc("K79W9GwaxIrSEfbpbdodzeUc03j60BqG","ULuAkt8Xjb3VLHds");
+    DarajaCpp::AccessToken _acc("K79W9GwaxIrSEfbpbdodzeUc03j60BqG","ULuAkt8Xjb3VLHds");
 
     return a.exec();
 }

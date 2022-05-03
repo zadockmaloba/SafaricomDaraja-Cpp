@@ -1,5 +1,5 @@
-#ifndef ACCESSEQUENCE_H
-#define ACCESSEQUENCE_H
+#ifndef ACCESSTOKEN_H
+#define ACCESSTOKEN_H
 
 /*
  * Author: Zadock Maloba
@@ -15,11 +15,11 @@
 #include <QtNetwork/QAuthenticator>
 
 namespace  DarajaCpp{
-class AccesSequence : public QObject
+class AccessToken : public QObject
 {
     Q_OBJECT
 public:
-    AccesSequence(QString consumerKey, QString consumerSecret);
+    AccessToken(QString consumerKey, QString consumerSecret);
 
     const QString &consumerSecret() const;
     void setConsumerSecret(const QString &newConsumerSecret);
@@ -45,4 +45,4 @@ private:
 };
 }
 
-#endif // ACCESSEQUENCE_H
+#endif // ACCESSTOKEN_H
