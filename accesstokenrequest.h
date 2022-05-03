@@ -32,7 +32,6 @@ private:
     QNetworkRequest m_httpRequest;
     QString m_consumerKey, m_consumerSecret, m_accessTokenString;
     QUrl m_authUrl;
-    bool m_succeeded;
 };
 }
 

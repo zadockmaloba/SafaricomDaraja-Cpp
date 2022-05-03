@@ -11,15 +11,13 @@ namespace DarajaCpp {
 AccessTokenRequest::AccessTokenRequest(QString consumerKey, QString consumerSecret)
     : m_consumerKey(consumerKey),
       m_consumerSecret(consumerSecret),
-      m_authUrl("https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"),
-      m_succeeded(false)
+      m_authUrl("https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials")
 {
+    auto const authHeader = QString(consumerKey+":"+consumerSecret).toUtf8().toBase64();
+
     this->m_httpRequest.setUrl(this->m_authUrl);
     this->m_httpRequest.setRawHeader("Content-Type", "application/json; charset=utf8");
-    this->m_httpRequest.setRawHeader("Authorization","Basic QXpzMktlalUxQVJ2SUw1SmRKc0FSYlYyZ0RyV21wT0I6aGlwR3ZGSmJPeHJpMzMwYw==");
-    this->m_httpRequest.setRawHeader("Cookie",
-                                     "incap_ses_1024_2742146=ukhlWrBitErUp67HLPs1Du4WcWIAAAAAxaCfuY88C1+UAaE98pBonA==; "
-                                     "visid_incap_2742146=EPpdLH1HRTCGDXJgry4FTsRAUGIAAAAAQUIPAAAAAAB6fJ+waBY2//+5ypBHW7PQ");
+    this->m_httpRequest.setRawHeader("Authorization", QByteArray("Basic ").append(authHeader));
 }
 
 const QString &AccessTokenRequest::consumerSecret() const {return m_consumerSecret;}
@@ -30,8 +28,6 @@ const QString &AccessTokenRequest::consumerKey() const{ return m_consumerKey; }
 
 void AccessTokenRequest::setConsumerKey(const QString &newConsumerKey){ m_consumerKey = newConsumerKey; }
 
-const QNetworkRequest &AccessTokenRequest::httpRequest() const
-{
-    return m_httpRequest;
-}
+const QNetworkRequest &AccessTokenRequest::httpRequest() const{ return m_httpRequest; }
+
 }
