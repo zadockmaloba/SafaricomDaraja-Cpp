@@ -6,13 +6,19 @@
 */
 
 #include <QCoreApplication>
-#include "accesstoken.h"
+#include "networkhandler.h"
+#include "accesstokenrequest.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    DarajaCpp::AccessToken _acc("K79W9GwaxIrSEfbpbdodzeUc03j60BqG","ULuAkt8Xjb3VLHds");
+    DarajaCpp::NetworkHandler netH;
+    //process the request
+    //arg1: consumerKey , arg2: consumerSecret
+    DarajaCpp::AccessTokenRequest _acc("K79W9GwaxIrSEfbpbdodzeUc03j60BqG","ULuAkt8Xjb3VLHds");
+
+    netH.get(&_acc.httpRequest());
 
     return a.exec();
 }

@@ -1,6 +1,3 @@
-#ifndef ACCESSTOKEN_H
-#define ACCESSTOKEN_H
-
 /*
  * Author: Zadock Maloba
  * E-mail: zadockmaloba@outlook.com
@@ -8,28 +5,35 @@
  * copyright: Zadock Maloba, 2022
 */
 
+#ifndef NETWORKHANDLER_H
+#define NETWORKHANDLER_H
+
+#define _NETWORK_HANDLER_MSG_(x) qInfo() <<"[NETWORK_HANDLER]: "<< x
+
+#include <QThread>
 #include <QObject>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QAuthenticator>
 
-namespace  DarajaCpp{
-class AccessToken : public QObject
+namespace DarajaCpp{
+class NetworkHandler : public QThread
 {
     Q_OBJECT
 public:
-    AccessToken(QString consumerKey, QString consumerSecret);
-
-    const QString &consumerSecret() const;
-    void setConsumerSecret(const QString &newConsumerSecret);
-
-    const QString &consumerKey() const;
-    void setConsumerKey(const QString &newConsumerKey);
-
+    NetworkHandler();
+    const QNetworkAccessManager &httpHandler() const;
     const QNetworkRequest &httpRequest() const;
 
-public slots:
+public: //methods
+    void get(const QNetworkRequest* request);
+    void put(const QNetworkRequest* request);
+
+private slots://NetworkReply
+    void onReadyRead();
+
+private slots:// NetworkManager
     void onAuthenticationRequired(QNetworkReply *reply, QAuthenticator *authenticator);
     void onEncrypted(QNetworkReply *reply);
     void onFinished(QNetworkReply *reply);
@@ -40,9 +44,6 @@ public slots:
 private:
     QNetworkAccessManager m_httpHandler;
     QNetworkRequest m_httpRequest;
-    QString m_consumerKey, m_consumerSecret;
-    QUrl m_authUrl;
 };
 }
-
-#endif // ACCESSTOKEN_H
+#endif // NETWORKHANDLER_H
