@@ -12,6 +12,7 @@
 #include <QNetworkRequest>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include "networkhandler.h"
 
 namespace  DarajaCpp{
 class AccessTokenRequest : public QObject
@@ -19,6 +20,7 @@ class AccessTokenRequest : public QObject
     Q_OBJECT
 public:
     AccessTokenRequest(QString consumerKey, QString consumerSecret);
+    QNetworkRequest *renderRequest(NetworkHandler* netH);
 
     const QString &consumerSecret() const;
     void setConsumerSecret(const QString &newConsumerSecret);

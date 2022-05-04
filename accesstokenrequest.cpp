@@ -20,6 +20,12 @@ AccessTokenRequest::AccessTokenRequest(QString consumerKey, QString consumerSecr
     this->m_httpRequest.setRawHeader("Authorization", QByteArray("Basic ").append(authHeader));
 }
 
+QNetworkRequest *AccessTokenRequest::renderRequest(NetworkHandler *netH)
+{
+    netH->get(&m_httpRequest);
+    return &m_httpRequest;
+}
+
 const QString &AccessTokenRequest::consumerSecret() const {return m_consumerSecret;}
 
 void AccessTokenRequest::setConsumerSecret(const QString &newConsumerSecret){ m_consumerSecret = newConsumerSecret; }
