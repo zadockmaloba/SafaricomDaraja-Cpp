@@ -8,6 +8,7 @@
 #include <QCoreApplication>
 #include "networkhandler.h"
 #include "accesstokenrequest.h"
+#include "registerurlrequest.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,9 +17,17 @@ int main(int argc, char *argv[])
     DarajaCpp::NetworkHandler netH;
     //process the request
     //arg1: consumerKey , arg2: consumerSecret
-    DarajaCpp::AccessTokenRequest _acc("K79W9GwaxIrSEfbpbdodzeUc03j60BqG","ULuAkt8Xjb3VLHds");
+    DarajaCpp::AccessTokenRequest _acc(""/*Enter consumer key*/,""/*Enter consumer secret*/);
 
-    netH.get(&_acc.httpRequest());
+    DarajaCpp::RegisterUrlRequest _url(""/*Generated accessToken*/);
+
+    _url.setRequestBody({{"ShortCode",""/*Business ShortCode*/},
+                         {"ResponseType",""/*Completed or Canceled*/},
+                         {"ConfirmationURL",""/*url to confirmation server*/},
+                         {"ValidationURL",""/*url to validation server*/}});
+
+    _acc.renderRequest(&netH);
+    _url.renderRequest(&netH);
 
     return a.exec();
 }
