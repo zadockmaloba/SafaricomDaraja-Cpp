@@ -12,7 +12,8 @@ CONFIG -= app_bundle
 SOURCES += \
         accesstokenrequest.cpp \
         main.cpp \
-        networkhandler.cpp
+        networkhandler.cpp \
+        registerurlrequest.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -21,4 +22,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     accesstokenrequest.h \
-    networkhandler.h
+    networkhandler.h \
+    registerurlrequest.h
