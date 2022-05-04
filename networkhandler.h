@@ -28,7 +28,7 @@ public:
 
 public: //methods
     void get(const QNetworkRequest* request);
-    void put(const QNetworkRequest* request);
+    void post(const QNetworkRequest* request, const QByteArray &data);
 
 private slots://NetworkReply
     void onReadyRead();

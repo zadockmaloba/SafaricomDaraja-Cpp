@@ -35,9 +35,9 @@ void NetworkHandler::get(const QNetworkRequest* request)
     _reply->waitForReadyRead(3000);
 }
 
-void NetworkHandler::put(const QNetworkRequest* request)
+void NetworkHandler::post(const QNetworkRequest* request, const QByteArray &data)
 {
-    auto const _reply = m_httpHandler.get(*request);
+    auto const _reply = m_httpHandler.post(*request, data);
     QObject::connect(_reply, &QNetworkReply::readyRead, this, &NetworkHandler::onReadyRead);
     _reply->waitForReadyRead(3000);
 }
@@ -61,7 +61,7 @@ void NetworkHandler::onEncrypted([[maybe_unused]]QNetworkReply *reply)
 void NetworkHandler::onFinished([[maybe_unused]]QNetworkReply *reply)
 {
     _NETWORK_HANDLER_MSG_("Request Finished");
-    delete reply;
+    //delete reply;
 }
 
 void NetworkHandler::onPreSharedKeyAuthenticationRequired([[maybe_unused]]QNetworkReply *reply, [[maybe_unused]]QSslPreSharedKeyAuthenticator *authenticator)
